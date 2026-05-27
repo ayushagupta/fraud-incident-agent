@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "fraud-incident-agent"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    # Serving
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "httpx>=0.27",
+    # ML
+    "lightgbm>=4.5",
+    "scikit-learn>=1.5",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    # Storage
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "psycopg2-binary>=2.9",
+    # MLflow
+    "mlflow>=2.14",
+    # Agent
+    "anthropic>=0.30",
+    # Config / validation
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "python-dotenv>=1.0",
+    # UI
+    "streamlit>=1.35",
+    # Eval
+    "pyyaml>=6.0",
+    # Tests
+    "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
