@@ -101,3 +101,27 @@ def test_health(client: TestClient) -> None:
     body = resp.json()
     assert body["status"] == "ok"
     assert body["model_version"] == TEST_MODEL_VERSION
+
+
+def test_predict_with_null_fields(client: TestClient) -> None:
+    null_fields = ["income", "credit_risk_score", "payment_type", "velocity_6h"]
+    payload = {**SAMPLE_RECORD, **{f: None for f in null_fields}}
+
+    resp = client.post("/predict", json=payload)
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["prediction"] in (0, 1)
+    assert 0.0 <= body["probability"] <= 1.0
+
+    with SessionLocal() as session:
+        row = (
+            session.query(Prediction)
+            .filter_by(model_version=TEST_MODEL_VERSION)
+            .order_by(Prediction.id.desc())
+            .first()
+        )
+    assert row is not None
+    stored = row.input_features
+    for field in null_fields:
+        assert stored[field] is None, f"expected {field} to be JSON null, got {stored[field]!r}"

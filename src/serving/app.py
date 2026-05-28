@@ -16,36 +16,36 @@ CAT_FEATURES = ["payment_type", "employment_status", "housing_status", "source",
 
 
 class PredictRequest(BaseModel):
-    income: float
-    name_email_similarity: float
-    prev_address_months_count: int
-    current_address_months_count: int
-    customer_age: int
-    days_since_request: float
-    intended_balcon_amount: float
-    payment_type: str
-    zip_count_4w: int
-    velocity_6h: float
-    velocity_24h: float
-    velocity_4w: float
-    bank_branch_count_8w: int
-    date_of_birth_distinct_emails_4w: int
-    employment_status: str
-    credit_risk_score: int
-    email_is_free: int
-    housing_status: str
-    phone_home_valid: int
-    phone_mobile_valid: int
-    bank_months_count: int
-    has_other_cards: int
-    proposed_credit_limit: float
-    foreign_request: int
-    source: str
-    session_length_in_minutes: float
-    device_os: str
-    keep_alive_session: int
-    device_distinct_emails_8w: int
-    device_fraud_count: int
+    income: float | None = None
+    name_email_similarity: float | None = None
+    prev_address_months_count: int | None = None
+    current_address_months_count: int | None = None
+    customer_age: int | None = None
+    days_since_request: float | None = None
+    intended_balcon_amount: float | None = None
+    payment_type: str | None = None
+    zip_count_4w: int | None = None
+    velocity_6h: float | None = None
+    velocity_24h: float | None = None
+    velocity_4w: float | None = None
+    bank_branch_count_8w: int | None = None
+    date_of_birth_distinct_emails_4w: int | None = None
+    employment_status: str | None = None
+    credit_risk_score: int | None = None
+    email_is_free: int | None = None
+    housing_status: str | None = None
+    phone_home_valid: int | None = None
+    phone_mobile_valid: int | None = None
+    bank_months_count: int | None = None
+    has_other_cards: int | None = None
+    proposed_credit_limit: float | None = None
+    foreign_request: int | None = None
+    source: str | None = None
+    session_length_in_minutes: float | None = None
+    device_os: str | None = None
+    keep_alive_session: int | None = None
+    device_distinct_emails_8w: int | None = None
+    device_fraud_count: int | None = None
 
 
 class PredictResponse(BaseModel):
@@ -75,8 +75,11 @@ app = FastAPI(lifespan=lifespan)
 def predict(request: PredictRequest) -> PredictResponse:
     features = request.model_dump()
     df = pd.DataFrame([features])
-    for col in CAT_FEATURES:
-        df[col] = df[col].astype("category")
+    for col in df.columns:
+        if col in CAT_FEATURES:
+            df[col] = df[col].astype("category")
+        else:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
 
     proba = float(app.state.model.predict_proba(df)[:, 1][0])
     pred = int(proba >= 0.5)
