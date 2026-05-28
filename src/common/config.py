@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # MLflow
     MLFLOW_TRACKING_URI: str = "http://localhost:5000"
     MLFLOW_MODEL_NAME: str = "fraud-detector"
-    MLFLOW_PRODUCTION_STAGE: str = "Production"
+    MLFLOW_PRODUCTION_ALIAS: str = "Production"
 
     # Anthropic
     ANTHROPIC_API_KEY: str = ""
