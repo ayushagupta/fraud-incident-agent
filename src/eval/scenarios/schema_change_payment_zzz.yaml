@@ -1,0 +1,14 @@
+name: schema_change_payment_zzz
+description: Unseen category ZZZ on payment_type should be diagnosed as a schema change requiring human escalation
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 1000.0
+  injection:
+    type: unseen_category
+    column: payment_type
+    value: ZZZ
+expected:
+  diagnosis: schema_change
+  action: alert_human
