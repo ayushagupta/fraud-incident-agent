@@ -22,6 +22,10 @@ class Settings(BaseSettings):
     PREDICTION_DRIFT_THRESHOLD: float = 0.1
     MONITORING_WINDOW_HOURS: int = 1
 
+    # Monitoring reference profile
+    REFERENCE_PROFILE_PATH: str = "data/reference_profile.pkl"
+    RAW_DATA_PATH: str = "data/raw/Base.csv"
+
     # Deployment gate
     AUC_IMPROVEMENT_MARGIN: float = 0.005
 
