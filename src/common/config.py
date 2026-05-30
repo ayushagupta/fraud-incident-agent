@@ -17,10 +17,13 @@ class Settings(BaseSettings):
     ANTHROPIC_MODEL: str = "claude-sonnet-4-6"
 
     # Monitoring thresholds
-    PSI_THRESHOLD: float = 0.2
-    NULL_RATE_THRESHOLD: float = 0.05
-    PREDICTION_DRIFT_THRESHOLD: float = 0.1
-    MONITORING_WINDOW_HOURS: int = 1
+    PSI_ALARM_THRESHOLD: float = 0.5
+    PSI_MODERATE_THRESHOLD: float = 0.2
+    PSI_MODERATE_COUNT: int = 3
+    NULL_RATE_THRESHOLD: float = 0.2
+    PREDICTION_DRIFT_THRESHOLD: float = 0.25
+    MONITORING_WINDOW_ROWS: int = 1000
+    MONITORING_INTERVAL_SECONDS: int = 30
 
     # Monitoring reference profile
     REFERENCE_PROFILE_PATH: str = "data/reference_profile.pkl"
