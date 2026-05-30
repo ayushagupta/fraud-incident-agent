@@ -42,3 +42,6 @@ include = ["src*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "integration: marks tests that require external services (Postgres, Anthropic API)",
+]

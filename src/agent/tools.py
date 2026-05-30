@@ -14,7 +14,7 @@ from mlflow.client import MlflowClient
 from sqlalchemy import text
 
 from src.common.config import settings
-from src.common.db import Incident, MonitoringMetric, Prediction, SessionLocal
+from src.common.db import Incident, MonitoringMetric, SessionLocal
 
 logger = logging.getLogger(__name__)
 
