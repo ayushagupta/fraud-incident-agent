@@ -1,0 +1,14 @@
+name: pipeline_bug_proposed_credit_limit_70pct
+description: Severe 70% null injection on proposed_credit_limit should be diagnosed as a pipeline bug requiring human escalation
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: nulls
+    feature: proposed_credit_limit
+    rate: 0.7
+expected:
+  diagnosis: pipeline_bug
+  action: alert_human

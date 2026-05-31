@@ -1,0 +1,14 @@
+name: schema_change_employment_status
+description: Unseen category CL on employment_status should be diagnosed as a schema change requiring human escalation
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: unseen_category
+    column: employment_status
+    value: CL
+expected:
+  diagnosis: schema_change
+  action: alert_human

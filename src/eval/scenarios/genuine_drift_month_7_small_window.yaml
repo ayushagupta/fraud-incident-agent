@@ -1,0 +1,10 @@
+name: genuine_drift_month_7_small_window
+description: Month 7 drift with a smaller traffic window should still produce a clear genuine drift diagnosis
+setup:
+  traffic:
+    month: 7
+    rows: 500
+    speed: 200.0
+expected:
+  diagnosis: genuine_drift
+  action: retrain

@@ -1,0 +1,14 @@
+name: pipeline_bug_session_length_15pct
+description: 15% null injection on session_length_in_minutes sits near the detection boundary and should still be diagnosed as a pipeline bug
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: nulls
+    feature: session_length_in_minutes
+    rate: 0.15
+expected:
+  diagnosis: no_incident
+  action: no_action

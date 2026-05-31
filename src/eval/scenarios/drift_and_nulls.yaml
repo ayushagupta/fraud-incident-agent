@@ -1,0 +1,14 @@
+name: drift_and_nulls
+description: Month 7 drift plus 30% nulls on income. Two anomalies at once. The dominant diagnosis is genuine_drift, but the correct action is alert_human (not retrain) because retraining on data containing a pipeline bug would produce a corrupted model. Tests whether the agent recognizes that compound failures defer to humans even when one signal is dominant.
+setup:
+  traffic:
+    month: 7
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: nulls
+    feature: income
+    rate: 0.3
+expected:
+  diagnosis: genuine_drift
+  action: alert_human

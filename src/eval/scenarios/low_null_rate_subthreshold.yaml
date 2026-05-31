@@ -1,0 +1,14 @@
+name: low_null_rate_subthreshold
+description: 10% null injection on income is below the detection threshold and should not trigger an incident
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: nulls
+    feature: income
+    rate: 0.1
+expected:
+  diagnosis: no_incident
+  action: no_action

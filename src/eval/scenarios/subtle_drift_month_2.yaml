@@ -1,0 +1,10 @@
+name: subtle_drift_month_2
+description: Early month 2 drift is less extreme than later months but should still be diagnosed as genuine drift requiring retraining
+setup:
+  traffic:
+    month: 2
+    rows: 1000
+    speed: 200.0
+expected:
+  diagnosis: genuine_drift
+  action: retrain

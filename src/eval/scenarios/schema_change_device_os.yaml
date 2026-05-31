@@ -1,0 +1,14 @@
+name: schema_change_device_os
+description: Unseen category WindowsPhone on device_os should be diagnosed as a schema change requiring human escalation
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: unseen_category
+    column: device_os
+    value: WindowsPhone
+expected:
+  diagnosis: schema_change
+  action: alert_human

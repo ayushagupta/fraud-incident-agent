@@ -1,0 +1,10 @@
+name: clean_month_0_smaller
+description: Clean month 0 traffic with a smaller window should still produce no incident and no action
+setup:
+  traffic:
+    month: 0
+    rows: 500
+    speed: 200.0
+expected:
+  diagnosis: no_incident
+  action: no_action

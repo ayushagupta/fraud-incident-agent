@@ -1,0 +1,14 @@
+name: schema_change_housing_status
+description: Unseen category BG on housing_status should be diagnosed as a schema change requiring human escalation
+setup:
+  traffic:
+    month: 0
+    rows: 1000
+    speed: 200.0
+  injection:
+    type: unseen_category
+    column: housing_status
+    value: XX
+expected:
+  diagnosis: schema_change
+  action: alert_human

@@ -1,0 +1,10 @@
+name: genuine_drift_month_5
+description: Mid-period population shift by month 5 should be diagnosed as genuine drift requiring retraining
+setup:
+  traffic:
+    month: 5
+    rows: 1000
+    speed: 200.0
+expected:
+  diagnosis: genuine_drift
+  action: retrain

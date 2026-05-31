@@ -1,0 +1,10 @@
+name: genuine_drift_month_3
+description: Moderate population shift by month 3 should still be diagnosed as genuine drift requiring retraining
+setup:
+  traffic:
+    month: 3
+    rows: 1000
+    speed: 200.0
+expected:
+  diagnosis: genuine_drift
+  action: retrain
