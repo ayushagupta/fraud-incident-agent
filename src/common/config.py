@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # MLflow
     MLFLOW_TRACKING_URI: str = "http://localhost:5000"
     MLFLOW_MODEL_NAME: str = "fraud-detector"
-    MLFLOW_PRODUCTION_ALIAS: str = "Production"
+    MLFLOW_PRODUCTION_ALIAS: str = "production"
 
     # Anthropic
     ANTHROPIC_API_KEY: str = ""
@@ -31,6 +31,7 @@ class Settings(BaseSettings):
 
     # Deployment gate
     AUC_IMPROVEMENT_MARGIN: float = 0.005
+    PROMOTION_MARGIN: float = 0.01
 
     # Serving
     SERVE_PORT: int = 8000
